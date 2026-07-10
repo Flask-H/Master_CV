@@ -1,0 +1,10 @@
+# knowledge/synonims.yaml
+# Mapea un id "alternativo" (que podría surgir de otra entrada de skills.yaml
+# o de una futura ampliación) a su id canónico, para evitar que el mismo
+# concepto quede duplicado con dos nombres distintos.
+
+atencion_publico: atencion_cliente
+trabajo_colaborativo: trabajo_equipo
+gestion_stock: reposicion
+ingles: idiomas_ingles
+excel_avanzado: paquete_office

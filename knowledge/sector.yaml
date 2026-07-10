@@ -1,0 +1,31 @@
+# knowledge/sector.yaml
+# Palabras clave asociadas a cada sector. Se buscan en el texto completo
+# de la oferta (normalizado) y se elige el sector con más coincidencias.
+
+Retail:
+  - "spar"
+  - "mercadona"
+  - "supermercado"
+  - "tienda"
+  - "reposición"
+  - "caja"
+
+Hostelería:
+  - "camarero"
+  - "restaurante"
+  - "cocina"
+  - "sala"
+  - "hotel"
+
+Tecnología:
+  - "desarrollador"
+  - "programador"
+  - "software"
+  - "backend"
+  - "frontend"
+
+Logística:
+  - "almacén"
+  - "carretillero"
+  - "picking"
+  - "transporte"

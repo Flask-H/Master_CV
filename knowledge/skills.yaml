@@ -1,0 +1,57 @@
+# knowledge/skills.yaml
+# Diccionario maestro de skills. Cada categoría contiene un id canónico de
+# skill y una lista de expresiones (tal y como suelen aparecer en ofertas)
+# que se normalizan a ese id.
+
+competencias:
+  atencion_cliente:
+    - "atención al público"
+    - "atención al cliente"
+    - "trato con clientes"
+    - "servicio al cliente"
+  trabajo_equipo:
+    - "trabajo en equipo"
+    - "colaboración"
+    - "capacidad para colaborar"
+  organizacion:
+    - "organización"
+    - "capacidad organizativa"
+    - "planificación de tareas"
+  resolucion_problemas:
+    - "resolución de problemas"
+    - "capacidad de resolución"
+    - "toma de decisiones"
+
+conocimientos:
+  caja_registradora:
+    - "manejo de caja"
+    - "uso de caja registradora"
+    - "cobro en caja"
+  reposicion:
+    - "reposición de producto"
+    - "reposición de stock"
+    - "gestión de inventario"
+  idiomas_ingles:
+    - "inglés"
+    - "nivel de inglés"
+    - "inglés hablado y escrito"
+
+herramientas:
+  paquete_office:
+    - "microsoft office"
+    - "paquete office"
+    - "excel"
+  tpv:
+    - "tpv"
+    - "terminal punto de venta"
+    - "software de punto de venta"
+
+softskills:
+  proactividad:
+    - "proactividad"
+    - "actitud proactiva"
+    - "iniciativa"
+  flexibilidad_horaria:
+    - "disponibilidad horaria"
+    - "flexibilidad de horario"
+    - "turnos rotativos"
