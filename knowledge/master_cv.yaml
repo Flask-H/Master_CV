@@ -1,0 +1,625 @@
+version: "1.0"
+
+metadata:
+  schema: master_cv
+  language: es
+  author: Luis Diego Olivas Chavarría
+  last_update: "2026"
+  description: >
+    Base de conocimiento maestra utilizada para la generación automática
+    de currículums personalizados, cartas de presentación y adaptación
+    ATS según ofertas de empleo.
+
+candidate:
+
+  personal_information:
+
+    first_name: Luis Diego
+
+    last_name: Olivas Chavarría
+
+    full_name: Luis Diego Olivas Chavarría
+
+    email: luisdiegoolivaschavarria@gmail.com
+
+    phone: "673369116"
+
+    location:
+
+      city: Tarragona
+
+      postal_code: "43002"
+
+      province: Tarragona
+
+      country: España
+
+    availability:
+
+      immediate: true
+
+      flexible_schedule: true
+
+      local_mobility: true
+
+      hours_per_week: 30
+
+languages:
+
+  - language: Español
+    level: Nativo
+    cefr: C2
+
+  - language: Catalán
+    level: B2
+    cefr: B2
+
+  - language: Inglés
+    level: B1
+    cefr: B1
+
+professional_profiles:
+
+  retail:
+
+    title: Atención al cliente
+
+    summary: >
+      Persona responsable, organizada y comprometida, con facilidad para aprender y adaptarse a nuevos entornos de trabajo. Destaco por mi actitud proactiva, mi capacidad para trabajar en equipo y mi orientación al cliente, ofreciendo siempre
+      un trato cercano, amable y profesional. Me gusta mantener el orden, realizar las tareas con atención al detalle y colaborar para que el trabajo se desarrolle de forma eficiente, contribuyendo a un buen ambiente laboral.
+
+  administrativo:
+
+    title: Auxiliar Administrativo
+
+    summary: >
+      Profesional con formación en administración y sistemas informáticos, experiencia en gestión de expedientes, facturación, documentación jurídica y soporte a usuarios. Acostumbrado a trabajar con CRM, herramientas ofimáticas y procedimientos administrativos.
+
+  informatico:
+
+    title: Técnico Informático
+
+    summary: >
+      Técnico informático con experiencia en
+      configuración y administración de servidores,
+      soporte técnico de primer nivel,
+      resolución de incidencias,
+      documentación técnica
+      y asistencia a usuarios.
+
+target_positions:
+
+  - Auxiliar administrativo
+
+  - Administrativo
+
+  - Atención al cliente
+
+  - Dependiente
+
+  - Cajero
+
+  - Reponedor
+
+  - Técnico de soporte
+
+  - Helpdesk
+
+  - Soporte técnico
+
+  - Gestor documental
+
+  - Operador backoffice
+
+industries:
+
+  - Retail
+
+  - Alimentación
+
+  - Comercio
+
+  - Administración
+
+  - Despachos profesionales
+
+  - Tecnología
+
+  - Telecomunicaciones
+
+  - Informática
+
+work_experience:
+
+  - id: exp_001
+
+    company: Web4Commerce
+
+    city: Tarragona
+
+    country: España
+
+    position: Ayudante de Gerente de Producto
+
+    alternative_positions:
+
+      - Product Assistant
+
+      - Product Manager Assistant
+
+    start_year: 2024
+
+    end_year: 2025
+
+    sectors:
+
+      - Ecommerce
+
+      - Tecnología
+
+      - Software
+
+    summary: >
+      Participación en tareas de soporte,
+      coordinación y gestión de plataformas
+      empresariales.
+
+    responsibilities:
+
+      - Soporte a usuarios en herramientas digitales.
+
+      - Soporte técnico básico.
+
+      - Asistencia remota.
+
+      - Resolución de incidencias.
+
+      - Coordinación de tareas del equipo.
+
+      - Seguimiento de procedimientos.
+
+      - Documentación funcional.
+
+      - Documentación técnica.
+
+      - Colaboración en mejora de procesos.
+
+      - Apoyo en transición tecnológica.
+
+      - Gestión de plataformas ERP.
+
+      - Gestión de plataformas CRM.
+
+      - Administración de Magento 2.
+
+      - Parametrización de sistemas.
+
+      - Gestión de datos.
+
+      - Integración de datos.
+
+      - Integración ERP.
+
+      - Integración CRM.
+
+      - Integración Magento 2.
+
+      - Organización mediante Scrum.
+
+      - Uso de Jira.
+
+      - Uso de Trello.
+
+      - Uso de Slack.
+
+      - Gestión de tareas.
+
+      - Comunicación con compañeros.
+
+      - Comunicación con clientes.
+
+      - Elaboración de presupuestos.
+
+      - Seguimiento de gastos.
+
+      - Gestión de órdenes de compra.
+
+      - Correspondencia comercial.
+
+      - Correspondencia técnica.
+
+      - Facturación de clientes.
+
+      - Seguimiento de procesos de facturación.
+
+      - Soporte técnico de redes locales.
+
+    software:
+
+      - Magento 2
+
+      - ERP
+
+      - CRM
+
+      - Jira
+
+      - Trello
+
+      - Slack
+
+    competencies:
+
+      - Atención al cliente
+
+      - Resolución de incidencias
+
+      - Organización
+
+      - Trabajo en equipo
+
+      - Comunicación
+
+      - Gestión documental
+
+      - Mejora de procesos
+
+      - Adaptabilidad
+
+      - Aprendizaje continuo
+
+      - Gestión del tiempo
+
+      - Coordinación
+
+      - Soporte técnico
+
+    ats_keywords:
+
+      - Atención al usuario
+
+      - Atención al cliente
+
+      - Customer Service
+
+      - Backoffice
+
+      - ERP
+
+      - CRM
+
+      - Magento
+
+      - Gestión documental
+
+      - Organización
+
+      - Procedimientos
+
+      - Facturación
+
+      - Documentación
+
+      - Scrum
+
+      - Jira
+
+      - Helpdesk
+
+      - Soporte
+
+      - Incidencias
+
+      - Ecommerce
+
+      - Comercio electrónico
+
+      - Gestión de datos
+
+      - Trabajo en equipo
+
+      - Comunicación
+
+      - Adaptación
+
+      - Soporte remoto
+
+      - Plataformas digitales
+
+  - id: exp_002
+
+    company: Mateo Baldrich Advocats
+
+    city: Tarragona
+
+    position: Auxiliar Administrativo
+
+    alternative_positions:
+
+      - Soporte Técnico
+
+      - Administrativo
+
+    start_year: 2025
+
+    end_year: Present
+
+    sectors:
+
+      - Jurídico
+
+      - Administración
+
+      - Servicios
+
+    responsibilities:
+
+      - Atención diaria a usuarios.
+
+      - Atención telemática.
+
+      - Resolución de incidencias.
+
+      - Gestión de consultas.
+
+      - Organización documental.
+
+      - Gestión de expedientes.
+
+      - Alta de expedientes.
+
+      - Archivo digital.
+
+      - Soporte a usuarios.
+
+      - Gestión documental.
+
+      - Elaboración de facturación.
+
+      - Seguimiento de facturación.
+
+      - Creación de plantillas documentales.
+
+      - Automatización documental.
+
+      - Colaboración entre departamentos.
+
+      - Gestión de CRM jurídico.
+
+      - Desarrollo de automatizaciones.
+
+      - Procesamiento de texto.
+
+      - Mejora de procesos.
+
+      - Implantación de procesos tecnológicos.
+
+    competencies:
+
+      - Organización
+
+      - Atención al cliente
+
+      - Comunicación
+
+      - Resolución de incidencias
+
+      - Gestión documental
+
+      - Gestión administrativa
+
+      - Trabajo en equipo
+
+      - Adaptabilidad
+
+      - Atención al detalle
+
+      - Aprendizaje continuo
+
+      - Gestión del tiempo
+
+      - Ofimática
+
+    ats_keywords:
+
+      - Administrativo
+
+      - Auxiliar administrativo
+
+      - Gestión documental
+
+      - Archivo
+
+      - Expedientes
+
+      - Atención al usuario
+
+      - Atención al cliente
+
+      - CRM
+
+      - Facturación
+
+      - Documentación
+
+      - Digitalización
+
+      - Organización
+
+      - Procedimientos
+
+      - Resolución de incidencias
+
+      - Backoffice
+
+      - Soporte
+
+      - Ofimática
+
+education:
+
+  - title: CFGS Telecomunicaciones y Equipos Informáticos
+
+    institution: Institut Comte de Rius
+
+    city: Tarragona
+
+    year: 2024
+
+  - title: Certificado Profesional Nivel 2 Actividades de Gestión Administrativa
+
+    institution: Formem Valls
+
+    city: Valls
+
+    year: 2025
+
+certifications:
+
+  - name: Prevención de Riesgos Profesionales
+
+    duration: 30 horas
+
+    institution: Institut Comte de Rius
+
+    year: 2024
+
+  - name: Manipulación de Alimentos
+
+    duration: 4 horas
+
+    institution: Fundación Santa María de Siurana
+
+    year: 2023
+
+  - name: CCNAv7 Switching Routing and Wireless Essentials
+
+    duration: 165 horas
+
+    institution: Institut Comte de Rius
+
+    year: 2024
+
+  - name: Química para no Químicos
+
+    duration: 30 horas
+
+    institution: Fórmate
+
+    year: 2026
+
+  - name: Automatización de TI con Python
+
+    institution: Google Career Certificates
+
+    status: Cursando
+
+technical_skills:
+
+  office:
+
+    - Word
+
+    - Excel
+
+    - PowerPoint
+
+    - Publisher
+
+    - Access
+
+  administration:
+
+    - Gestión documental
+
+    - Facturación
+
+    - Expedientes
+
+    - Archivo digital
+
+    - Correspondencia
+
+    - Procedimientos
+
+  software:
+
+    - Magento 2
+
+    - CRM
+
+    - ERP
+
+    - Jira
+
+    - Trello
+
+    - Slack
+
+    - TeamViewer
+
+    - AnyDesk
+
+    - FactuSOL
+
+    - ContaSOL
+
+    - NominaSOL
+
+  programming:
+
+    - Python
+
+    - HTML
+
+    - CSS
+
+    - JavaScript
+
+  file_formats:
+
+    - CSV
+
+    - XML
+
+    - XLS
+
+    - XLSX
+
+soft_skills:
+
+  - Organización
+
+  - Responsabilidad
+
+  - Adaptabilidad
+
+  - Aprendizaje continuo
+
+  - Comunicación
+
+  - Trabajo en equipo
+
+  - Orientación al cliente
+
+  - Atención al detalle
+
+  - Proactividad
+
+  - Gestión del tiempo
+
+  - Planificación
+
+  - Resolución de problemas
+
+  - Resolución de incidencias
+
+  - Capacidad de aprendizaje
+
+  - Flexibilidad
+
+  - Colaboración
+
+  - Empatía
+
+  - Actitud positiva
