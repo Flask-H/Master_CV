@@ -1,10 +1,71 @@
 # knowledge/synonims.yaml
-# Mapea un id "alternativo" (que podría surgir de otra entrada de skills.yaml
-# o de una futura ampliación) a su id canónico, para evitar que el mismo
+# Mapea un id "alternativo" a su id canónico, para evitar que el mismo
 # concepto quede duplicado con dos nombres distintos.
 
+# --- Competencias ---
 atencion_publico: atencion_cliente
+trato_amable: atencion_cliente
+servicio_mesa: hosteleria_turismo
+ayudante_sala: hosteleria_turismo
+ayudante_camarero: hosteleria_turismo
+cambrers: hosteleria_turismo
 trabajo_colaborativo: trabajo_equipo
-gestion_stock: reposicion
+capacidad_colaborar: trabajo_equipo
+capacidad_organizativa: organizacion
+persona_organizada: organizacion
+planificacion_tareas: organizacion
+resolucion_incidencias: resolucion_problemas
+solucion_conflictos: resolucion_problemas
+comunicacion_clara: comunicacion
+comunicacion_efectiva: comunicacion
+project_management: gestion_proyectos
+product_manager: gestion_proyectos
+administracion_sistemas: administracion_redes
+preparacion_pedidos: logistica_almacen
+picking_packing: logistica_almacen
+
+# --- Conocimientos ---
+cobro_caja: caja_registradora
+cajero_reponedor: caja_registradora
+manejo_caja: caja_registradora
+reposicion_stock: reposicion
+reposicion_producto: reposicion
+reponedor: reposicion
 ingles: idiomas_ingles
+ingles_alto: idiomas_ingles
+facturacion: contabilidad_facturacion
+administrativo_contable: contabilidad_facturacion
+administrativo_facturacion: contabilidad_facturacion
+programacion: desarrollo_software
+desarrollo_python: desarrollo_software
+sistemas_windows_linux: sistemas_operativos
+redes_tcp_ip: redes_telecomunicaciones
+helpdesk: soporte_it
+tecnico_informatico: soporte_it
+tecnico_soporte: soporte_it
+asistencia_tecnica: soporte_it
+recepcionista_hotel: hosteleria_turismo
+atencion_pasajeros: hosteleria_turismo
+agente_administrativo: hosteleria_turismo
+tramitacion_administrativa: administracion_publica_legal
+gestion_documental: administracion_publica_legal
+
+# --- Herramientas ---
+microsoft_office: paquete_office
 excel_avanzado: paquete_office
+hojas_calculo: paquete_office
+terminal_punto_venta: tpv
+sistemas_pago: tpv
+gestion_tickets: ticketing
+soporte_remoto: telemetria_remota
+
+# --- Softskills ---
+actitud_proactiva: proactividad
+iniciativa: proactividad
+ganas_aprender: proactividad
+disponibilidad_horaria: flexibilidad_horaria
+turnos_rotativos: flexibilidad_horaria
+atencion_detalle: orientacion_detalle
+entorno_dinamico: tolerancia_presion
+trabajo_presion: tolerancia_presion
+adaptabilidad_cambio: resiliencia_adaptabilidad

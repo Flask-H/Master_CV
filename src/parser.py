@@ -2,25 +2,6 @@
 parser.py
 =========
 Primer eslabón del pipeline de generación de CVs a medida.
-
-Flujo de este módulo:
-    archivo .txt (oferta)
-        -> limpieza de texto (regex)
-        -> normalización con spaCy (minúsculas + lematización)
-        -> detección de secciones (Descripción / Funciones / Requisitos / Se ofrece)
-        -> extracción de skills usando knowledge/skills.yaml
-        -> desambiguación de duplicados usando knowledge/synonims.yaml
-        -> detección de sector usando knowledge/sector.yaml
-        -> construcción del objeto JobOffer
-
-Dependencias externas:
-    pip install spacy rapidfuzz pyyaml
-    python -m spacy download es_core_news_md
-
-Uso:
-    from parser import JobOfferParser
-    parser = JobOfferParser()
-    oferta = parser.parse("ofertas/spar.txt")
 """
 
 from __future__ import annotations
@@ -39,17 +20,13 @@ from rapidfuzz import fuzz, process
 # Configuración
 # ---------------------------------------------------------------------------
 
-# knowledge/ se asume como carpeta hermana de src/
 KNOWLEDGE_DIR = Path(__file__).resolve().parent.parent / "knowledge"
 SKILLS_YAML = KNOWLEDGE_DIR / "skills.yaml"
 SYNONIMS_YAML = KNOWLEDGE_DIR / "synonims.yaml"
 SECTOR_YAML = KNOWLEDGE_DIR / "sector.yaml"
 
-# Puntuación mínima (0-100) para aceptar un match por similitud con RapidFuzz
 FUZZY_THRESHOLD = 85
-
 SPACY_MODEL = "es_core_news_md"
-
 
 # ---------------------------------------------------------------------------
 # Modelo de datos
@@ -59,20 +36,17 @@ SPACY_MODEL = "es_core_news_md"
 class JobOffer:
     empresa: str
     sector: str
-    skills: List[str] = field(default_factory=list)       # unión de las 4 categorías
+    skills: List[str] = field(default_factory=list)
     funciones: List[str] = field(default_factory=list)
 
-    # Desglose por categoría (útil para ATS.py y selector.py)
     competencias: List[str] = field(default_factory=list)
     conocimientos: List[str] = field(default_factory=list)
     herramientas: List[str] = field(default_factory=list)
     softskills: List[str] = field(default_factory=list)
 
-    # Texto crudo de cada sección, por si algún módulo posterior lo necesita
     descripcion: str = ""
     texto_requisitos: str = ""
     texto_se_ofrece: str = ""
-
 
 # ---------------------------------------------------------------------------
 # 1. Limpieza de texto
@@ -82,7 +56,6 @@ _HTML_TAG_RE = re.compile(r"<[^>]+>")
 _MULTI_NEWLINE_RE = re.compile(r"\n{2,}")
 _MULTI_SPACE_RE = re.compile(r"[ \t]{2,}")
 
-# Rango amplio de emojis y pictogramas comunes
 _EMOJI_RE = re.compile(
     "["
     "\U0001F300-\U0001FAFF"
@@ -95,91 +68,58 @@ _EMOJI_RE = re.compile(
     flags=re.UNICODE,
 )
 
-# Cualquier carácter que no sea letra (con acentos/ñ), número, espacio o
-# puntuación básica se considera "raro" y se elimina
-_WEIRD_CHARS_RE = re.compile(r"[^\w\sáéíóúñüÁÉÍÓÚÑÜ.,;:()%/\-]")
-
+_WEIRD_CHARS_RE = re.compile(r"[^\w\sáéíóúñüÁÉÍÓÚÑÜ.,;:()%/\-¿?¡!]")
 
 def clean_text(raw_text: str) -> str:
-    """Limpia el texto crudo de la oferta antes de cualquier procesamiento NLP."""
     text = html.unescape(raw_text)
     text = _HTML_TAG_RE.sub(" ", text)
-    text = _EMOJI_RE.sub("", text)
+    text = _EMOJI_RE.sub("?", text) # Los emojis tipo check/bullet se transforman en ? a veces
     text = _WEIRD_CHARS_RE.sub(" ", text)
     text = _MULTI_NEWLINE_RE.sub("\n", text)
     text = _MULTI_SPACE_RE.sub(" ", text)
 
-    # quitamos líneas vacías sobrantes y espacios al principio/fin de línea
     lines = [ln.strip() for ln in text.split("\n")]
     lines = [ln for ln in lines if ln]
     return "\n".join(lines)
-
 
 # ---------------------------------------------------------------------------
 # 2. Normalización con spaCy
 # ---------------------------------------------------------------------------
 
 class Normalizer:
-    """Envuelve el pipeline de spaCy para minúsculas + lematización."""
-
     def __init__(self, model: str = SPACY_MODEL):
         self.nlp = spacy.load(model)
 
     def normalize(self, text: str) -> str:
-        """
-        'ATENCIÓN AL CLIENTE' -> 'atención al cliente' (lematizado).
-        Se conservan las stopwords para no romper frases compuestas
-        como 'atención al cliente' o 'trabajo en equipo'.
-        """
         doc = self.nlp(text.lower())
         tokens = [tok.lemma_ for tok in doc if not tok.is_space]
         return " ".join(tokens)
-
-    def extract_nouns(self, text: str) -> List[str]:
-        """Extrae sustantivos lematizados y únicos, útil para 'funciones'."""
-        doc = self.nlp(text.lower())
-        nouns: List[str] = []
-        for tok in doc:
-            if tok.pos_ in {"NOUN", "PROPN"} and not tok.is_stop:
-                lemma = tok.lemma_.strip()
-                if lemma and lemma not in nouns:
-                    nouns.append(lemma)
-        return nouns
-
 
 # ---------------------------------------------------------------------------
 # 3. Detección de secciones
 # ---------------------------------------------------------------------------
 
-# Cada clave es el nombre interno de la sección; el valor es un patrón regex
-# que debe matchear una línea completa (posiblemente con ":" al final) para
-# considerarla una cabecera de esa sección.
+# Añadidos [¿\s]* y tolerancias para atrapar frases tipo "¿Qué hará que tu candidatura destaque?"
 SECTION_PATTERNS: Dict[str, re.Pattern] = {
     "descripcion": re.compile(
-        r"^\s*descripci[oó]n(\s+de\s+la\s+oferta|\s+del\s+puesto)?\s*:?\s*$",
+        r"^[¿\s]*(descripci[oó]n|sobre\s+la\s+oferta|sobre\s+nosotros|el\s+puesto).*[?\s\:]*$",
         re.IGNORECASE,
     ),
     "funciones": re.compile(
-        r"^\s*(funciones|responsabilidades|tareas)\s*:?\s*$",
+        r"^[¿\s]*(funciones|responsabilidades|tareas|tu\s+misi[oó]n|qu[ée]\s+har[áa]s).*[?\s\:]*$",
         re.IGNORECASE,
     ),
     "requisitos": re.compile(
-        r"^\s*(requisitos|se\s+requiere|perfil\s+buscado|qu[ée]\s+buscamos)\s*:?\s*$",
+        r"^[¿\s]*(requisitos|se\s+requiere|perfil\s+buscado|perfil\s+ideal|qu[ée]\s+buscamos|qu[ée]\s+necesitamos|qu[ée]\s+har[áa]\s+que\s+tu\s+candidatura\s+destaque).*[?\s\:]*$",
         re.IGNORECASE,
     ),
     "se_ofrece": re.compile(
-        r"^\s*(se\s+ofrece|ofrecemos|beneficios|condiciones)\s*:?\s*$",
+        r"^[¿\s]*(se\s+ofrece|ofrecemos|beneficios|condiciones|qu[ée]\s+(te\s+)?ofrecemos).*[?\s\:]*$",
         re.IGNORECASE,
     ),
 }
 
-
 def split_sections(text: str) -> Dict[str, str]:
-    """
-    Recorre el texto línea a línea y separa el contenido en las 4 secciones
-    conocidas. Todo lo que aparezca antes de la primera cabecera se asigna
-    a 'descripcion' (suele ser el resumen inicial de la oferta).
-    """
     sections: Dict[str, List[str]] = {key: [] for key in SECTION_PATTERNS}
     current = "descripcion"
 
@@ -191,68 +131,32 @@ def split_sections(text: str) -> Dict[str, str]:
                 break
         if header_found:
             current = header_found
-            continue  # no añadimos la línea de cabecera al contenido
+            continue 
         sections[current].append(line)
 
     return {key: "\n".join(lines).strip() for key, lines in sections.items()}
 
-
 # ---------------------------------------------------------------------------
-# 4. Diccionario de skills (skills.yaml + synonims.yaml)
+# 4. Diccionario de skills
 # ---------------------------------------------------------------------------
 
 def load_yaml(path: Path) -> dict:
     if not path.exists():
-        raise FileNotFoundError(
-            f"No se encontró el archivo de conocimiento: {path}"
-        )
+        raise FileNotFoundError(f"No se encontró el archivo de conocimiento: {path}")
     with path.open("r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
 
-
 _CHUNK_SPLIT_RE = re.compile(r"[.,;\n•\-–]+")
 
-
 class SkillDictionary:
-    """
-    Estructura skills.yaml esperada:
-
-        competencias:
-          atencion_cliente:
-            - "atención al público"
-            - "trato con clientes"
-            - "servicio al cliente"
-          trabajo_equipo:
-            - "trabajo en equipo"
-            - "colaboración"
-        conocimientos:
-          ...
-        herramientas:
-          ...
-        softskills:
-          ...
-
-    Estructura synonims.yaml esperada (id detectado -> id canónico):
-
-        atencion_publico: atencion_cliente
-        trabajo_colaborativo: trabajo_equipo
-    """
-
     CATEGORIES = ("competencias", "conocimientos", "herramientas", "softskills")
 
-    def __init__(
-        self,
-        skills_path: Path,
-        synonims_path: Path,
-        normalizer: Normalizer,
-        fuzzy_threshold: int = FUZZY_THRESHOLD,
-    ):
+    def __init__(self, skills_path: Path, synonims_path: Path, normalizer: Normalizer, fuzzy_threshold: int = FUZZY_THRESHOLD):
         self.normalizer = normalizer
         self.fuzzy_threshold = fuzzy_threshold
         raw_skills = load_yaml(skills_path)
         self.synonyms: dict = load_yaml(synonims_path) if synonims_path.exists() else {}
 
-        # frase_normalizada -> (skill_id, categoria)
         self.phrase_index: Dict[str, Tuple[str, str]] = {}
 
         for category in self.CATEGORIES:
@@ -263,21 +167,9 @@ class SkillDictionary:
                     self.phrase_index[norm_phrase] = (skill_id, category)
 
     def canonical(self, skill_id: str) -> str:
-        """Aplica synonims.yaml para evitar duplicados tipo 'atencion_publico'
-        y 'atencion_cliente' conviviendo como si fueran distintos."""
         return self.synonyms.get(skill_id, skill_id)
 
     def extract_skills(self, text: str) -> Dict[str, Set[str]]:
-        """
-        Devuelve un dict {categoria: {skill_id, ...}} a partir de un texto
-        (normalmente la sección de requisitos, aunque puede aplicarse a
-        cualquier sección).
-
-        Estrategia:
-          1. Coincidencia por substring contra el diccionario (rápida y exacta).
-          2. Si no hay coincidencia exacta, se recurre a RapidFuzz
-             (token_set_ratio) contra todas las frases del diccionario.
-        """
         found: Dict[str, Set[str]] = {cat: set() for cat in self.CATEGORIES}
         if not text.strip():
             return found
@@ -296,13 +188,7 @@ class SkillDictionary:
             if matched_exact:
                 continue
 
-            # Fallback: similitud léxica con RapidFuzz
-            best = process.extractOne(
-                chunk,
-                all_phrases,
-                scorer=fuzz.token_set_ratio,
-                score_cutoff=self.fuzzy_threshold,
-            )
+            best = process.extractOne(chunk, all_phrases, scorer=fuzz.token_set_ratio, score_cutoff=self.fuzzy_threshold)
             if best is not None:
                 phrase, _score, _idx = best
                 skill_id, category = self.phrase_index[phrase]
@@ -310,24 +196,11 @@ class SkillDictionary:
 
         return found
 
-
 # ---------------------------------------------------------------------------
-# 5. Detección de sector (sector.yaml)
+# 5. Detección de sector
 # ---------------------------------------------------------------------------
 
 class SectorDetector:
-    """
-    Estructura sector.yaml esperada (sector -> palabras clave asociadas):
-
-        Retail:
-          - "spar"
-          - "supermercado"
-          - "reposición"
-        Hostelería:
-          - "camarero"
-          - "restaurante"
-    """
-
     def __init__(self, sector_path: Path, normalizer: Normalizer):
         self.normalizer = normalizer
         raw = load_yaml(sector_path) if sector_path.exists() else {}
@@ -345,42 +218,45 @@ class SectorDetector:
                 best_sector, best_hits = sector, hits
         return best_sector
 
-
 # ---------------------------------------------------------------------------
 # 6. Extracción de la empresa
 # ---------------------------------------------------------------------------
 
-_EMPRESA_RE = re.compile(r"(?:empresa|compañ[ií]a)\s*:\s*(.+)", re.IGNORECASE)
-
+_EMPRESA_RE = re.compile(r"(?:empresa|compañ[ií]a)\s*:\s*([^\n]+)", re.IGNORECASE)
+# Se añadió [^\n] para prohibir que arrastre saltos de línea y destruya el nombre
+_EMPRESA_NATURAL_RE = re.compile(r"en\s+([A-Z0-9][^\n]{1,35}?)\s+(?:buscamos|seleccionamos|queremos|necesitamos|estamos|te\s+estamos)", re.IGNORECASE)
 
 def extract_empresa(text: str) -> str:
-    """
-    Intenta extraer el nombre de la empresa buscando primero un patrón
-    explícito 'Empresa: X'. Si no existe, recurre a la primera línea no
-    vacía del documento como heurística (suele ser el título del anuncio).
-    """
     match = _EMPRESA_RE.search(text)
     if match:
         return match.group(1).strip()
+    
+    match_natural = _EMPRESA_NATURAL_RE.search(text)
+    if match_natural:
+        return match_natural.group(1).strip()
 
+    # Si todo falla, extrae la primera línea decente (ignora cabeceras o viñetas)
+    ignore_words = {"sector", "descripción", "oferta", "puesto", "funciones", "requisitos"}
     for line in text.split("\n"):
-        if line.strip():
-            return line.strip()
+        line_clean = line.strip()
+        if not line_clean:
+            continue
+        if line_clean.lower() in ignore_words:
+            continue
+        if line_clean.startswith("¿") or line_clean.endswith("?"):
+            continue
+        if re.match(r"^[-•*?]", line_clean):
+            continue
+        return line_clean[:50]
 
     return "Desconocido"
-
 
 # ---------------------------------------------------------------------------
 # 7. Orquestador principal
 # ---------------------------------------------------------------------------
 
 class JobOfferParser:
-    def __init__(
-        self,
-        knowledge_dir: Path = KNOWLEDGE_DIR,
-        spacy_model: str = SPACY_MODEL,
-        fuzzy_threshold: int = FUZZY_THRESHOLD,
-    ):
+    def __init__(self, knowledge_dir: Path = KNOWLEDGE_DIR, spacy_model: str = SPACY_MODEL, fuzzy_threshold: int = FUZZY_THRESHOLD):
         self.normalizer = Normalizer(spacy_model)
         self.skill_dict = SkillDictionary(
             knowledge_dir / "skills.yaml",
@@ -388,9 +264,7 @@ class JobOfferParser:
             self.normalizer,
             fuzzy_threshold=fuzzy_threshold,
         )
-        self.sector_detector = SectorDetector(
-            knowledge_dir / "sector.yaml", self.normalizer
-        )
+        self.sector_detector = SectorDetector(knowledge_dir / "sector.yaml", self.normalizer)
 
     def parse(self, filepath: Union[str, Path]) -> JobOffer:
         path = Path(filepath)
@@ -402,16 +276,31 @@ class JobOfferParser:
         empresa = extract_empresa(cleaned)
         sector = self.sector_detector.detect(cleaned)
 
-        # Los requisitos son la fuente principal de skills, pero a veces
-        # aparecen mezclados dentro de la descripción, así que revisamos ambas.
-        skills_por_categoria = self.skill_dict.extract_skills(
-            sections.get("requisitos", "")
-        )
-        extra = self.skill_dict.extract_skills(sections.get("descripcion", ""))
-        for categoria, valores in extra.items():
-            skills_por_categoria[categoria] |= valores
+        skills_por_categoria = self.skill_dict.extract_skills(sections.get("requisitos", ""))
+        for extra_sec in ["descripcion", "funciones"]:
+            extra = self.skill_dict.extract_skills(sections.get(extra_sec, ""))
+            for categoria, valores in extra.items():
+                skills_por_categoria[categoria] |= valores
 
-        funciones = self.normalizer.extract_nouns(sections.get("funciones", ""))
+        # Procesamiento avanzado de funciones
+        raw_funciones = sections.get("funciones", "")
+        funciones = []
+        for line in raw_funciones.split("\n"):
+            # Limpiamos viñetas (ahora incluye '?' por si los emojis se corrompieron)
+            line_clean = line.lstrip(" -•*?¿¡!").strip()
+            if len(line_clean) < 4:
+                continue
+                
+            # Si el texto es un párrafo descriptivo masivo (>100 chars) y no es viñeta clara, 
+            # delegamos en SpaCy para que separe las oraciones gramaticales.
+            if len(line_clean) > 100 and not re.match(r"^\s*[-•*?]", line):
+                doc = self.normalizer.nlp(line_clean)
+                for sent in doc.sents:
+                    sent_text = sent.text.lstrip(" -•*?¿¡!").strip()
+                    if len(sent_text) > 4:
+                        funciones.append(sent_text)
+            else:
+                funciones.append(line_clean)
 
         todas_las_skills = sorted(
             skills_por_categoria["competencias"]
@@ -434,14 +323,12 @@ class JobOfferParser:
             texto_se_ofrece=sections.get("se_ofrece", ""),
         )
 
-
 # ---------------------------------------------------------------------------
 # Uso directo por línea de comandos (debug rápido)
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     import sys
-    print(KNOWLEDGE_DIR)
     if len(sys.argv) != 2:
         print("Uso: python parser.py ruta/a/oferta.txt")
         sys.exit(1)
@@ -452,7 +339,10 @@ if __name__ == "__main__":
     print("Empresa   :", oferta.empresa)
     print("Sector    :", oferta.sector)
     print("Skills    :", oferta.skills)
-    print("Funciones :", oferta.funciones)
+    print("Funciones :")
+    for f in oferta.funciones:
+        print(f"  - {f}")
+    print("Categorías:")
     print("  competencias :", oferta.competencias)
     print("  conocimientos:", oferta.conocimientos)
     print("  herramientas :", oferta.herramientas)
