@@ -1,625 +1,231 @@
-version: "1.0"
-
 metadata:
-  schema: master_cv
-  language: es
-  author: Luis Diego Olivas Chavarría
-  last_update: "2026"
-  description: >
-    Base de conocimiento maestra utilizada para la generación automática
-    de currículums personalizados, cartas de presentación y adaptación
-    ATS según ofertas de empleo.
+  version: "1.0"
+  description: "Master CV de referencia para optimización y emparejamiento automatizado con matcher.py"
+  last_updated: "2026"
 
-candidate:
-
-  personal_information:
-
-    first_name: Luis Diego
-
-    last_name: Olivas Chavarría
-
-    full_name: Luis Diego Olivas Chavarría
-
-    email: luisdiegoolivaschavarria@gmail.com
-
-    phone: "673369116"
-
-    location:
-
-      city: Tarragona
-
-      postal_code: "43002"
-
-      province: Tarragona
-
-      country: España
-
-    availability:
-
-      immediate: true
-
-      flexible_schedule: true
-
-      local_mobility: true
-
-      hours_per_week: 30
-
-languages:
-
-  - language: Español
-    level: Nativo
-    cefr: C2
-
-  - language: Catalán
-    level: B2
-    cefr: B2
-
-  - language: Inglés
-    level: B1
-    cefr: B1
+personal_information:
+  full_name: "Luis Diego Olivas Chavarría"
+  email: "luisdiegoolivaschavarria@gmail.com"
+  phone: "673 369 116"
+  location:
+    city: "Tarragona"
+    postal_code: "43002"
+    country: "España"
 
 professional_profiles:
-
-  retail:
-
-    title: Atención al cliente
-
-    summary: >
-      Persona responsable, organizada y comprometida, con facilidad para aprender y adaptarse a nuevos entornos de trabajo. Destaco por mi actitud proactiva, mi capacidad para trabajar en equipo y mi orientación al cliente, ofreciendo siempre
-      un trato cercano, amable y profesional. Me gusta mantener el orden, realizar las tareas con atención al detalle y colaborar para que el trabajo se desarrolle de forma eficiente, contribuyendo a un buen ambiente laboral.
-
-  administrativo:
-
-    title: Auxiliar Administrativo
-
-    summary: >
-      Profesional con formación en administración y sistemas informáticos, experiencia en gestión de expedientes, facturación, documentación jurídica y soporte a usuarios. Acostumbrado a trabajar con CRM, herramientas ofimáticas y procedimientos administrativos.
-
-  informatico:
-
-    title: Técnico Informático
-
-    summary: >
-      Técnico informático con experiencia en
-      configuración y administración de servidores,
-      soporte técnico de primer nivel,
-      resolución de incidencias,
-      documentación técnica
-      y asistencia a usuarios.
+  - id: "perfil_administracion_cliente"
+    description: "Persona responsable, organizada y comprometida, con facilidad para aprender y adaptarse a nuevos entornos de trabajo. Destaco por mi actitud proactiva, mi capacidad para trabajar en equipo y mi orientación al cliente, ofreciendo siempre un trato cercano, amable y profesional. Me gusta mantener el orden, realizar las tareas con atención al detalle y colaborar para que el trabajo se desarrolle de forma eficiente, contribuyendo a un buen ambiente laboral."
+  - id: "perfil_it_sistemas"
+    description: "Técnico informático con experiencia en configuración y administración de servidores web y gestión de datos. Ofrezco un perfil versátil y resolutivo, con capacidad para adaptarme rápidamente a nuevos entornos. Cuento con experiencia en soporte técnico de nivel básico e intermedio, especialmente en entornos Windows y Magento 2, realizando resolución de incidencias, asistencia remota y documentación técnica y functional. He trabajado atendiendo incidencias de hardware básico (periféricos) y soporte a nivel usuario."
+  - id: "perfil_mixto_gestion_it"
+    description: "Profesional con formación en administración y sistemas informáticos, experiencia en gestión de expedientes, facturación, documentación jurídica y soporte a usuarios. Acostumbrado a trabajar con CRM, herramientas ofimáticas y procedimientos administrativos, destacando por mi organización, capacidad de aprendizaje, atención al detalle y orientación a la mejora de procesos."
 
 target_positions:
-
-  - Auxiliar administrativo
-
-  - Administrativo
-
-  - Atención al cliente
-
-  - Dependiente
-
-  - Cajero
-
-  - Reponedor
-
-  - Técnico de soporte
-
-  - Helpdesk
-
-  - Soporte técnico
-
-  - Gestor documental
-
-  - Operador backoffice
-
-industries:
-
-  - Retail
-
-  - Alimentación
-
-  - Comercio
-
-  - Administración
-
-  - Despachos profesionales
-
-  - Tecnología
-
-  - Telecomunicaciones
-
-  - Informática
-
-work_experience:
-
-  - id: exp_001
-
-    company: Web4Commerce
-
-    city: Tarragona
-
-    country: España
-
-    position: Ayudante de Gerente de Producto
-
-    alternative_positions:
-
-      - Product Assistant
-
-      - Product Manager Assistant
-
-    start_year: 2024
-
-    end_year: 2025
-
-    sectors:
-
-      - Ecommerce
-
-      - Tecnología
-
-      - Software
-
-    summary: >
-      Participación en tareas de soporte,
-      coordinación y gestión de plataformas
-      empresariales.
-
-    responsibilities:
-
-      - Soporte a usuarios en herramientas digitales.
-
-      - Soporte técnico básico.
-
-      - Asistencia remota.
-
-      - Resolución de incidencias.
-
-      - Coordinación de tareas del equipo.
-
-      - Seguimiento de procedimientos.
-
-      - Documentación funcional.
-
-      - Documentación técnica.
-
-      - Colaboración en mejora de procesos.
-
-      - Apoyo en transición tecnológica.
-
-      - Gestión de plataformas ERP.
-
-      - Gestión de plataformas CRM.
-
-      - Administración de Magento 2.
-
-      - Parametrización de sistemas.
-
-      - Gestión de datos.
-
-      - Integración de datos.
-
-      - Integración ERP.
-
-      - Integración CRM.
-
-      - Integración Magento 2.
-
-      - Organización mediante Scrum.
-
-      - Uso de Jira.
-
-      - Uso de Trello.
-
-      - Uso de Slack.
-
-      - Gestión de tareas.
-
-      - Comunicación con compañeros.
-
-      - Comunicación con clientes.
-
-      - Elaboración de presupuestos.
-
-      - Seguimiento de gastos.
-
-      - Gestión de órdenes de compra.
-
-      - Correspondencia comercial.
-
-      - Correspondencia técnica.
-
-      - Facturación de clientes.
-
-      - Seguimiento de procesos de facturación.
-
-      - Soporte técnico de redes locales.
-
-    software:
-
-      - Magento 2
-
-      - ERP
-
-      - CRM
-
-      - Jira
-
-      - Trello
-
-      - Slack
-
-    competencies:
-
-      - Atención al cliente
-
-      - Resolución de incidencias
-
-      - Organización
-
-      - Trabajo en equipo
-
-      - Comunicación
-
-      - Gestión documental
-
-      - Mejora de procesos
-
-      - Adaptabilidad
-
-      - Aprendizaje continuo
-
-      - Gestión del tiempo
-
-      - Coordinación
-
-      - Soporte técnico
-
-    ats_keywords:
-
-      - Atención al usuario
-
-      - Atención al cliente
-
-      - Customer Service
-
-      - Backoffice
-
-      - ERP
-
-      - CRM
-
-      - Magento
-
-      - Gestión documental
-
-      - Organización
-
-      - Procedimientos
-
-      - Facturación
-
-      - Documentación
-
-      - Scrum
-
-      - Jira
-
-      - Helpdesk
-
-      - Soporte
-
-      - Incidencias
-
-      - Ecommerce
-
-      - Comercio electrónico
-
-      - Gestión de datos
-
-      - Trabajo en equipo
-
-      - Comunicación
-
-      - Adaptación
-
-      - Soporte remoto
-
-      - Plataformas digitales
-
-  - id: exp_002
-
-    company: Mateo Baldrich Advocats
-
-    city: Tarragona
-
-    position: Auxiliar Administrativo
-
-    alternative_positions:
-
-      - Soporte Técnico
-
-      - Administrativo
-
-    start_year: 2025
-
-    end_year: Present
-
-    sectors:
-
-      - Jurídico
-
-      - Administración
-
-      - Servicios
-
-    responsibilities:
-
-      - Atención diaria a usuarios.
-
-      - Atención telemática.
-
-      - Resolución de incidencias.
-
-      - Gestión de consultas.
-
-      - Organización documental.
-
-      - Gestión de expedientes.
-
-      - Alta de expedientes.
-
-      - Archivo digital.
-
-      - Soporte a usuarios.
-
-      - Gestión documental.
-
-      - Elaboración de facturación.
-
-      - Seguimiento de facturación.
-
-      - Creación de plantillas documentales.
-
-      - Automatización documental.
-
-      - Colaboración entre departamentos.
-
-      - Gestión de CRM jurídico.
-
-      - Desarrollo de automatizaciones.
-
-      - Procesamiento de texto.
-
-      - Mejora de procesos.
-
-      - Implantación de procesos tecnológicos.
-
-    competencies:
-
-      - Organización
-
-      - Atención al cliente
-
-      - Comunicación
-
-      - Resolución de incidencias
-
-      - Gestión documental
-
-      - Gestión administrativa
-
-      - Trabajo en equipo
-
-      - Adaptabilidad
-
-      - Atención al detalle
-
-      - Aprendizaje continuo
-
-      - Gestión del tiempo
-
-      - Ofimática
-
-    ats_keywords:
-
-      - Administrativo
-
-      - Auxiliar administrativo
-
-      - Gestión documental
-
-      - Archivo
-
-      - Expedientes
-
-      - Atención al usuario
-
-      - Atención al cliente
-
-      - CRM
-
-      - Facturación
-
-      - Documentación
-
-      - Digitalización
-
-      - Organización
-
-      - Procedimientos
-
-      - Resolución de incidencias
-
-      - Backoffice
-
-      - Soporte
-
-      - Ofimática
+  - "Técnico en Sistemas Informáticos y Telecomunicaciones"
+  - "Soporte Técnico / Helpdesk"
+  - "Auxiliar Administrativo"
+  - "Ayudante de Gerente de Producto"
+  - "Gestor de Plataformas E-commerce"
+
+experiences:
+  - job_title: "Ayudante de Gerente de Producto / Gerente de Producto"
+    company: "Web4commerce"
+    location: "Tarragona"
+    period: "2024 - 2025"
+    description: "Soporte y gestión técnica en plataforma e-commerce y optimización de flujos de datos operativos."
+    achievements_and_tasks:
+      - "Soporte integral a usuarios en herramientas digitales y plataformas de e-commerce."
+      - "Coordinación y organización de tareas del equipo bajo metodologías Ágiles (Scrum)."
+      - "Seguimiento riguroso de procedimientos internos y redacción de documentación técnica y funcional."
+      - "Colaboración directa en la mejora de procesos operativos y apoyo activo en procesos de transición tecnológica."
+      - "Soporte técnico avanzado de redes informáticas locales, análisis de conectividad y resolución de incidencias."
+      - "Integración masiva de datos estructurados entre sistemas ERP, CRM y la plataforma Magento 2."
+      - "Resolución de incidencias técnicas en entorno web, asistencia remota avanzada y control de logs."
+      - "Asistencia especializada en la parametrización de sistemas y el mantenimiento de feeds automatizados."
+      - "Configuración detallada de parámetros y optimización de servidores web en entornos Linux, Apache y Nginx."
+      - "Uso experto de consola Linux para tareas críticas de configuración, monitorización de sistemas y revisión de logs de errores."
+      - "Elaboración, validación y mantenimiento continuo de feeds de datos complejos utilizando formatos CSV, XML y XLSX."
+      - "Comunicación fluida y directa con colegas y clientes tanto en soporte comercial como técnico."
+      - "Apoyo en la planificación estratégica y operativa del departamento de producto."
+      - "Atención y fidelización al cliente vía telemática solventando dudas complejas de la plataforma."
+      - "Ayuda en la preparación de presupuestos del área, monitoreo controlado de gastos, órdenes de compra y adquisición de suministros."
+      - "Gestión y administración avanzada de plataformas de administración interna (Backoffice, CRM y ERP)."
+      - "Redacción y respuesta ágil de correspondencia comercial formal y documentación técnica de ingeniería."
+    competencias:
+      - "Gestión de plataformas e-commerce"
+      - "Administración de servidores web"
+      - "Integración de datos (ERP/CRM)"
+      - "Metodologías ágiles (Scrum)"
+      - "Documentación técnica"
+      - "Resolución de incidencias web"
+      - "Soporte técnico remoto"
+      - "Optimización de procesos"
+
+  - job_title: "Auxiliar Administrativo / Soporte Técnico"
+    company: "Mateo Baldrich Advocats / Despacho de Abogados Mateo Baldrich"
+    location: "Tarragona"
+    period: "2025"
+    description: "Gestión administrativa integral, soporte de sistemas informáticos y automatización documental para el despacho."
+    achievements_and_tasks:
+      - "Atención al cliente y soporte diario avanzado a usuarios internos y externos de manera telemática y presencial."
+      - "Resolución ágil de incidencias técnicas y gestión eficiente de consultas de software y hardware."
+      - "Organización, clasificación y archivo digital de documentación confidencial y expedientes complejos."
+      - "Colaboración interdepartamental proactiva orientada a la optimización y mejora de procesos administrativos internos."
+      - "Gestión, control y alta estructurada de expedientes jurídicos dentro del sistema corporativo."
+      - "Elaboración, emisión y seguimiento exhaustivo de procesos de facturación de clientes conforme a los estrictos protocolos internos del despacho."
+      - "Creación, programación y mantenimiento de plantillas avanzadas de fusión documental para la generación 100% automatizada de documentación jurídica de uso recurrente."
+      - "Participación estratégica en la implantación y mejora de procesos administrativos combinados con soluciones tecnológicas."
+      - "Soporte técnico de nivel básico e intermedio tanto en sistemas operativos Windows como en aplicaciones de software específico."
+      - "Análisis en profundidad de redes de datos locales y del entorno informático general para optimizar herramientas y agilizar flujos de trabajo."
+      - "Gestión, depuración y enriquecimiento de bases de datos embebidas dentro del CRM jurídico."
+      - "Desarrollo propio de scripts y software de automatización básica de TI y procesamiento inteligente de texto."
+    competencias:
+      - "Gestión documental jurídica"
+      - "Facturación y control administrativo"
+      - "Fusión documental automatizada"
+      - "Soporte técnico microinformático"
+      - "Gestión de CRM Jurídico"
+      - "Análisis y optimización de redes"
+      - "Desarrollo de automatizaciones"
+      - "Atención y soporte al usuario"
+
+projects:
+  - name: "Desarrollo de Scripts de Automatización de Procesos Administrativos"
+    description: "Creación de software a medida para el procesamiento automatizado de textos y plantillas de fusión documental, reduciendo los tiempos de gestión de expedientes y facturación en entornos de oficina."
+    technologies: ["Python", "Herramientas de IA", "Ofimática Avanzada", "Fusión Documental"]
 
 education:
-
-  - title: CFGS Telecomunicaciones y Equipos Informáticos
-
-    institution: Institut Comte de Rius
-
-    city: Tarragona
-
+  - degree: "CFGS (Ciclo Formativo de Grado Superior) en Telecomunicaciones y Equipos Informáticos"
+    institution: "Institut Comte de Rius"
+    location: "Tarragona"
     year: 2024
-
-  - title: Certificado Profesional Nivel 2 Actividades de Gestión Administrativa
-
-    institution: Formem Valls
-
-    city: Valls
-
+    details: "Especialización en redes, switching, routing, sistemas informáticos y nociones avanzadas en sistemas audiovisuales."
+  - degree: "CP (Certificado de Profesionalidad) Nivel 2 en Actividades de Gestión Administrativa"
+    institution: "Formem Valls"
+    location: "Valls, Tarragona"
     year: 2025
+    details: "Formación oficial intensiva en facturación, operaciones administrativas, gestión documental, archivo y atención al cliente."
 
 certifications:
-
-  - name: Prevención de Riesgos Profesionales
-
-    duration: 30 horas
-
-    institution: Institut Comte de Rius
-
+  - name: "CCNAv7: Switching, Routing and Wireless Essentials"
+    institution: "Institut Comte de Rius"
+    duration: "165 h."
     year: 2024
-
-  - name: Manipulación de Alimentos
-
-    duration: 4 horas
-
-    institution: Fundación Santa María de Siurana
-
+  - name: "Automatización de TI con Python"
+    institution: "Google Career Certificates - Coursera"
+    status: "Cursando"
+    year: 2026
+  - name: "Prevención de Riesgos Profesionales"
+    institution: "Institut Comte de Rius"
+    duration: "30 h."
+    year: 2024
+  - name: "Química para no Químicos"
+    institution: "Fórmate"
+    duration: "30 h."
+    status: "Online"
+    year: 2026
+  - name: "Manipulación de Alimentos"
+    institution: "Fundación Santa María De Siurana"
+    duration: "4 h."
+    location: "Tarragona"
     year: 2023
 
-  - name: CCNAv7 Switching Routing and Wireless Essentials
+skills:
+  - "Administración básica de sistemas Linux"
+  - "Soporte técnico helpdesk (Nivel básico e intermedio)"
+  - "Resolución de incidencias de hardware y software"
+  - "Gestión y análisis de datos masivos"
+  - "Diseño y mantenimiento de plantillas de fusión documental"
+  - "Facturación y contabilidad administrativa básica"
+  - "Gestión documental y archivo digital estructurado"
+  - "Instalaciones cableadas de datos (Cableado estructurado)"
+  - "Instalaciones por radiofrecuencia y enlaces inalámbricos"
+  - "Administración y mantenimiento avanzado del panel de control de e-commerce Magento 2"
+  - "Monitorización del rendimiento técnico de sistemas a través del análisis de logs"
+  - "Desarrollo e integración avanzada de flujos de datos estructurados (CSV, XML, XLS, XLSX)"
+  - "Administración de repositorios, control de versiones del código y gestión de ramas empleando Git"
+  - "Planificación operativa y control ágil de proyectos técnicos bajo metodología Scrum"
+  - "Soporte técnico microinformático de nivel 1 y 2 en entornos corporativos"
+  - "Instalación, despliegue de actualizaciones y optimización de sistemas operativos Windows (10, 11)"
+  - "Asistencia técnica y control remoto de equipos mediante helpdesk (AnyDesk, TeamViewer)"
+  - "Diagnóstico preciso y reparación de incidencias de hardware básico y periféricos de oficina"
+  - "Administración de datos, expedientes y facturas"
+  - "Diseño de flujos de automatización administrativa mediante técnicas de fusión documental"
+  - "Manejo avanzado y automatizado de hojas de cálculo y bases de datos con Microsoft Office y LibreOffice"
+  - "Instalación y resolución de incidencias con certificados electrónicos corporativos y firmas digitales"
+  - "Mantenimiento operativo de la red local aplicando protocolos estándar (SMTP, FTP, SSH, DNS, SMB, WinRM)"
+  - "Aplicación práctica de criterios de SEO técnico básico y gestión de plataformas como Google Merchant Center"
+  - "Uso aplicado de herramientas avanzadas de Inteligencia Artificial para la resolución de tareas de TI"
+  - "Diseño de material multimedia corporativo y adaptación de formatos con herramientas de la suite Adobe y Canva"
+  - "Procedimientos de organización documental, archivo digital indexado y protección de datos"
 
-    duration: 165 horas
+software:
+  - category: "Sistemas Operativos"
+    items: ["Windows 10", "Windows 10 LT", "Windows 11", "Linux (Consola/Línea de comandos)", "Android"]
+  - category: "Plataformas E-commerce y Web"
+    items: ["Magento 2 (Panel de administración avanzado)", "WordPress (Básico)", "Infraestructura LAMP (Linux, Apache, MySQL, PHP)", "Brevo", "Google Analytics", "Google Merchant"]
+  - category: "Ofimática y Gestión"
+    items: ["Microsoft Office Avanzado (Word, Excel, PowerPoint, Publisher, Access)", "LibreOffice", "Adobe Acrobat", "Google Drive", "OneDrive", "Microsoft Teams", "Outlook"]
+  - category: "Software de Gestión Empresarial"
+    items: ["Software DELSOL (NominaSOL, FactuSOL, ContaSOL)", "Sistemas ERP generales", "Sistemas CRM corporativos", "CRM Jurídico especializado"]
+  - category: "Gestión Ágil y Repositorios"
+    items: ["Jira", "Trello", "Slack", "Git (Gestión de ramas, repositorios, QA y testing)"]
+  - category: "Asistencia Remota"
+    items: ["AnyDesk", "TeamViewer"]
+  - category: "Creación de Contenido"
+    items: ["Adobe Illustrator", "Adobe Photoshop", "Canva", "Audacity", "CapCut", "VSCO", "Ibis Paint", "Sketchbook"]
 
-    institution: Institut Comte de Rius
-
-    year: 2024
-
-  - name: Química para no Químicos
-
-    duration: 30 horas
-
-    institution: Fórmate
-
-    year: 2026
-
-  - name: Automatización de TI con Python
-
-    institution: Google Career Certificates
-
-    status: Cursando
-
-technical_skills:
-
-  office:
-
-    - Word
-
-    - Excel
-
-    - PowerPoint
-
-    - Publisher
-
-    - Access
-
-  administration:
-
-    - Gestión documental
-
-    - Facturación
-
-    - Expedientes
-
-    - Archivo digital
-
-    - Correspondencia
-
-    - Procedimientos
-
-  software:
-
-    - Magento 2
-
-    - CRM
-
-    - ERP
-
-    - Jira
-
-    - Trello
-
-    - Slack
-
-    - TeamViewer
-
-    - AnyDesk
-
-    - FactuSOL
-
-    - ContaSOL
-
-    - NominaSOL
-
-  programming:
-
-    - Python
-
-    - HTML
-
-    - CSS
-
-    - JavaScript
-
-  file_formats:
-
-    - CSV
-
-    - XML
-
-    - XLS
-
-    - XLSX
+languages:
+  - language: "Español"
+    proficiency: "Nativo / Lengua materna"
+  - language: "Catalán"
+    proficiency: "Nivel B2 / Competencia intermedia-alta"
+  - language: "Inglés"
+    proficiency: "Nivel B1 / A2 (Comprensión técnica y correspondencia comercial)"
 
 soft_skills:
+  - "Trabajo en equipo y colaboración interdepartamental"
+  - "Organización, orden estricto y planificación de tareas"
+  - "Capacidad de aprendizaje continuo y asimilación rápida"
+  - "Orientación al cliente, empatía y vocación de servicio"
+  - "Proactividad, actitud positiva y optimismo"
+  - "Comunicación asertiva, efectiva y trato cercano"
+  - "Atención minuciosa al detalle y rigurosidad"
+  - "Gestión eficiente del tiempo y priorización de tareas"
+  - "Adaptabilidad y resiliencia ante entornos dinámicos"
+  - "Capacidad de mantenimiento del orden y la limpieza laboral"
+  - "Habilidades básicas de gestión y coordinación de equipos"
+  - "Capacidad analítica para el desglose de problemas complejos"
+  - "Responsabilidad y compromiso ético absoluto con el manejo de información confidencial y documentación legal"
 
-  - Organización
+hard_skills:
+  - "Desarrollo Frontend básico (HTML, CSS, JavaScript)"
+  - "Programación y automatización de TI con Python"
+  - "Administración técnica del backend de servidores web bajo infraestructuras de arquitectura LAMP"
+  - "Análisis de logs y monitorización de procesos Linux"
+  - "Conocimientos estructurados de Redes (Switching, Routing, Wireless)"
+  - "Dominio de Protocolos de red (SMTP, FTP, SSH, DNS, SMB, WinRM, PSRemoting)"
+  - "Gestión y formateo de archivos de datos estructurados (CSV, XML, XLS, XLSX)"
+  - "SEO básico aplicado a plataformas web"
+  - "Uso avanzado de herramientas de Inteligencia Artificial aplicadas al trabajo técnico"
+  - "Procedimientos y normativas de Prevención de Riesgos Profesionales"
+  - "Interpretación de comandos bash de Linux"
+  - "Despliegue operativo de sistemas de ticketing y flujos ágiles mediante el ecosistema Jira/Slack"
+  - "Conocimiento técnico en instalaciones de telecomunicaciones por cableado y radiofrecuencia"
+  - "Dominio operativo completo del ecosistema Software DELSOL (FactuSOL, NominaSOL y ContaSOL)"
+  - "Conocimientos normativos e instrumentales de Prevención de Riesgos Laborales en entornos tecnológicos"
+  - "Gestión técnica de plataformas CMS para el mantenimiento y actualización ágil de sitios web corporativos"
 
-  - Responsabilidad
+preferences:
+  - type: "Disponibilidad de jornada"
+    value: "Flexibilidad horaria (Contratos de 30h o adaptables)"
+  - type: "Incorporación"
+    value: "Inmediata"
+  - type: "Movilidad"
+    value: "Movilidad geográfica local"
+  - type: "Intereses futuros"
+    value: "Pasión por la investigación, el progreso tecnológico"
 
-  - Adaptabilidad
 
-  - Aprendizaje continuo
 
-  - Comunicación
 
-  - Trabajo en equipo
-
-  - Orientación al cliente
-
-  - Atención al detalle
-
-  - Proactividad
-
-  - Gestión del tiempo
-
-  - Planificación
-
-  - Resolución de problemas
-
-  - Resolución de incidencias
-
-  - Capacidad de aprendizaje
-
-  - Flexibilidad
-
-  - Colaboración
-
-  - Empatía
-
-  - Actitud positiva
