@@ -4,12 +4,12 @@ metadata:
   last_updated: "2026"
 
 personal_information:
-  full_name: "Luis Diego Olivas Chavarría"
+  full_name: "Full name"
   email: "luisdiegoolivaschavarria@gmail.com"
-  phone: "673 369 116"
+  phone: "xxx xxx xxx"
   location:
     city: "Tarragona"
-    postal_code: "43002"
+    postal_code: "43000"
     country: "España"
 
 professional_profiles:
